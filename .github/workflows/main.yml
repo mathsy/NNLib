@@ -1,6 +1,7 @@
 name: Build Web App
  
 on: [push]
+defaults: true
  
 jobs:
   build:
