@@ -1,20 +1,25 @@
-name: NetFrameWork.Legacy.CI
-
+name: Build Web App
+ 
 on: [push]
-
-ACTIONS_ALLOW_UNSECURE_COMMANDS: true
  
 jobs:
   build:
+ 
     runs-on: windows-latest
-
+ 
     steps:
     - uses: actions/checkout@v1
-    - name: Setup Nuget.exe
-      uses: warrenbuckley/Setup-Nuget@v1
-    - name: Restore packages
-      run: nuget restore src/NNLib.sln
-    - name: Setup MSBuild.exe
+      name: Checkout Code
+     
+    - name: Setup MSBuild Path
       uses: warrenbuckley/Setup-MSBuild@v1
-    - name: Build with MSBuild
-      run: msbuild  src/NNLib.sln -p:Configuration=Release
+       
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.2
+     
+    - name: Restore NuGet Packages
+      run: nuget restore SimpleFrameworkApp.sln
+ 
+    - name: Build and Publish Web App
+      run: msbuild src/NNLib.sln /p:Configuration=Release
+ 
