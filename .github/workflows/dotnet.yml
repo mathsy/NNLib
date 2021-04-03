@@ -6,7 +6,11 @@ jobs:
   build:
     runs-on: windows-latest
 
-    steps:
+   steps:
     - uses: actions/checkout@v1
+    - name: Setup Nuget.exe
+      uses: warrenbuckley/Setup-Nuget@v1
+    - name: Setup MSBuild.exe
+      uses: warrenbuckley/Setup-MSBuild@v1
     - name: Build with MSBuild
-      run: msbuild  src/NNLib.sln -p:Configuration=Release
+      run: msbuild  YOUR_SOLUTION_NAME -p:Configuration=Release
